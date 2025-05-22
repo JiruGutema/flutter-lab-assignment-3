@@ -50,45 +50,14 @@ class AlbumListScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Expanded(
-                        child: InkWell(
-                          onTap: () => context.push('/detail/${firstAlbum.id}'),
-                          child: SizedBox(
-                            height: 200,
-                            width: 200,
-                            child: ClipRect(
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    'assets/images/thumbnail.png',
-                                    width: 100,
-                                    height: 100,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    firstAlbum.id.toString(),
-                                    style: const TextStyle(fontSize: 24),
-                                  ),
-                                  Text(
-                                    '${firstAlbum.title}',
-                                    style: const TextStyle(fontSize: 18),
-                                    softWrap: true,
-                                    overflow:
-                                        TextOverflow
-                                            .ellipsis, // Clipped with ellipsis
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            color: const Color.fromARGB(255, 208, 208, 208),
                           ),
-                        ),
-                      ),
-                      if (hasSecond)
-                        Expanded(
                           child: InkWell(
                             onTap:
-                                () =>
-                                    context.push('/detail/${secondAlbum!.id}'),
+                                () => context.push('/detail/${firstAlbum.id}'),
                             child: SizedBox(
                               height: 200,
                               width: 200,
@@ -102,11 +71,11 @@ class AlbumListScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      (secondAlbum?.id).toString(),
+                                      firstAlbum.id.toString(),
                                       style: const TextStyle(fontSize: 24),
                                     ),
                                     Text(
-                                      '${secondAlbum?.title}',
+                                      '${firstAlbum.title}',
                                       style: const TextStyle(fontSize: 18),
                                       softWrap: true,
                                       overflow:
@@ -115,6 +84,54 @@ class AlbumListScreen extends StatelessWidget {
                                       textAlign: TextAlign.center,
                                     ),
                                   ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      if (hasSecond)
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8),
+                              ),
+                              color: const Color.fromARGB(255, 208, 208, 208),
+                            ),
+                            child: InkWell(
+                              onTap:
+                                  () => context.push(
+                                    '/detail/${secondAlbum!.id}',
+                                  ),
+                              child: SizedBox(
+                                height: 200,
+                                width: 200,
+                                child: ClipRect(
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/thumbnail.png',
+                                        width: 100,
+                                        height: 100,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        (secondAlbum?.id).toString(),
+                                        style: const TextStyle(fontSize: 24),
+                                      ),
+                                      Text(
+                                        '${secondAlbum?.title}',
+                                        style: const TextStyle(fontSize: 18),
+                                        softWrap: true,
+                                        overflow:
+                                            TextOverflow
+                                                .ellipsis, // Clipped with ellipsis
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
