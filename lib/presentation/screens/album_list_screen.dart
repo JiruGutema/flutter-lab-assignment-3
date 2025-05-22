@@ -35,24 +35,99 @@ class AlbumListScreen extends StatelessWidget {
               ),
             );
           } else if (state is AlbumLoaded) {
+            // ...existing code...
             return ListView.builder(
-              itemCount: state.albums.length,
+              itemCount: (state.albums.length / 2).ceil(),
               itemBuilder: (context, index) {
-                final album = state.albums[index];
-                return ListTile(
-                  leading: Image.asset(
-                    'assets/images/thumbnail.png',
-                    width: 50,
-                    height: 50,
+                final firstAlbum = state.albums[index * 2];
+                final secondIndex = index * 2 + 1;
+                final hasSecond = secondIndex < state.albums.length;
+                final secondAlbum =
+                    hasSecond ? state.albums[secondIndex] : null;
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () => context.push('/detail/${firstAlbum.id}'),
+                          child: SizedBox(
+                            height: 200,
+                            width: 200,
+                            child: ClipRect(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/images/thumbnail.png',
+                                    width: 100,
+                                    height: 100,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    firstAlbum.id.toString(),
+                                    style: const TextStyle(fontSize: 24),
+                                  ),
+                                  Text(
+                                    '${firstAlbum.title}',
+                                    style: const TextStyle(fontSize: 18),
+                                    softWrap: true,
+                                    overflow:
+                                        TextOverflow
+                                            .ellipsis, // Clipped with ellipsis
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (hasSecond)
+                        Expanded(
+                          child: InkWell(
+                            onTap:
+                                () =>
+                                    context.push('/detail/${secondAlbum!.id}'),
+                            child: SizedBox(
+                              height: 200,
+                              width: 200,
+                              child: ClipRect(
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/thumbnail.png',
+                                      width: 100,
+                                      height: 100,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      (secondAlbum?.id).toString(),
+                                      style: const TextStyle(fontSize: 24),
+                                    ),
+                                    Text(
+                                      '${secondAlbum?.title}',
+                                      style: const TextStyle(fontSize: 18),
+                                      softWrap: true,
+                                      overflow:
+                                          TextOverflow
+                                              .ellipsis, // Clipped with ellipsis
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      else
+                        Expanded(child: Container()), // Empty for odd count
+                    ],
                   ),
-                  title: Text(
-                    album.id.toString() + "  " + album.title,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  onTap: () => context.push('/detail/${album.id}'),
                 );
               },
             );
+            // ...existing code...
           }
           return const SizedBox();
         },
