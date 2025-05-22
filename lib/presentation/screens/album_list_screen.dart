@@ -64,11 +64,11 @@ class AlbumListScreen extends StatelessWidget {
                               child: ClipRect(
                                 child: Column(
                                   children: [
-                                    Image.asset(
-                                      'assets/images/thumbnail.png',
-                                      width: 100,
-                                      height: 100,
+                                    const Placeholder(
+                                      fallbackWidth: 20,
+                                      fallbackHeight: 100,
                                     ),
+
                                     const SizedBox(height: 8),
                                     Text(
                                       firstAlbum.id.toString(),
@@ -111,10 +111,9 @@ class AlbumListScreen extends StatelessWidget {
                                 child: ClipRect(
                                   child: Column(
                                     children: [
-                                      Image.asset(
-                                        'assets/images/thumbnail.png',
-                                        width: 100,
-                                        height: 100,
+                                      const Placeholder(
+                                        fallbackWidth: 20,
+                                        fallbackHeight: 100,
                                       ),
                                       const SizedBox(height: 8),
                                       Text(

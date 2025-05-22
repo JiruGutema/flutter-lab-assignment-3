@@ -18,40 +18,68 @@ class AlbumDetailScreen extends StatelessWidget {
             final photos =
                 state.photos.where((p) => p.albumId == albumId).toList();
 
+            // ...existing code...
             return ListView(
               padding: const EdgeInsets.all(16),
               children: [
                 Text(
                   album.title,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  // style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                const SizedBox(height: 16),
-                ...photos.map(
-                  (photo) => ListTile(
-                    leading: Image.asset(
-                      'assets/images/thumbnail.png',
-                      width: 50,
-                      height: 50,
-                    ),
-
-                    title: Row(
-                      children: [
-                        Text(
-                          photo.id.toString(),
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(photo.title, overflow: TextOverflow.clip),
-                        ),
-                      ],
-                    ),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
+                const SizedBox(height: 16),
+                for (int i = 0; i < photos.length; i += 2)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            const Placeholder(
+                              fallbackWidth: 180,
+                              fallbackHeight: 180,
+                            ),
+                            Text(
+                              photos[i].id.toString(),
+                              style: TextStyle(fontSize: 24),
+                            ),
+                            Text(
+                              photos[i].title,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      if (i + 1 < photos.length)
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Placeholder(
+                                fallbackWidth: 180,
+                                fallbackHeight: 180,
+                              ),
+                              Text(
+                                photos[i + 1].id.toString(),
+                                style: TextStyle(fontSize: 24),
+                              ),
+                              Text(
+                                photos[i + 1].title,
+                                overflow: TextOverflow.ellipsis,
+
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ],
+                          ),
+                        )
+                      else
+                        const Expanded(
+                          child: SizedBox(),
+                        ),
+                    ],
+                  ),
               ],
             );
           }
