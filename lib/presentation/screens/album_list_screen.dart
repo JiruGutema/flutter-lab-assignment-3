@@ -35,7 +35,6 @@ class AlbumListScreen extends StatelessWidget {
               ),
             );
           } else if (state is AlbumLoaded) {
-            // ...existing code...
             return ListView.builder(
               itemCount: (state.albums.length / 2).ceil(),
               itemBuilder: (context, index) {
@@ -49,101 +48,49 @@ class AlbumListScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            color: const Color.fromARGB(255, 208, 208, 208),
-                          ),
-                          child: InkWell(
-                            onTap:
-                                () => context.push('/detail/${firstAlbum.id}'),
-                            child: SizedBox(
-                              height: 200,
-                              width: 200,
-                              child: ClipRect(
-                                child: Column(
-                                  children: [
-                                    const Placeholder(
-                                      fallbackWidth: 20,
-                                      fallbackHeight: 100,
-                                    ),
-
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      firstAlbum.id.toString(),
-                                      style: const TextStyle(fontSize: 24),
-                                    ),
-                                    Text(
-                                      '${firstAlbum.title}',
-                                      style: const TextStyle(fontSize: 18),
-                                      softWrap: true,
-                                      overflow:
-                                          TextOverflow
-                                              .ellipsis, // Clipped with ellipsis
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: Colors.lightBlue.shade50,
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: Colors.blueGrey, width: 2),
+                        ),
+                        child: InkWell(
+                          onTap: () => context.push('/detail/${firstAlbum.id}'),
+                          child: SizedBox(
+                            height: 200,
+                            width: 200,
+                            child: ClipRect(
+                              child: Column(
+                                children: [
+                                  const Placeholder(
+                                    fallbackWidth: 100,
+                                    fallbackHeight: 100,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    firstAlbum.id.toString(),
+                                    style: const TextStyle(fontSize: 24),
+                                  ),
+                                  Text(
+                                    '${firstAlbum.title}',
+                                    style: const TextStyle(fontSize: 18),
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 20),
+                                ],
                               ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: 8),
-                      if (hasSecond)
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(8),
-                              ),
-                              color: const Color.fromARGB(255, 208, 208, 208),
-                            ),
-                            child: InkWell(
-                              onTap:
-                                  () => context.push(
-                                    '/detail/${secondAlbum!.id}',
-                                  ),
-                              child: SizedBox(
-                                height: 200,
-                                width: 200,
-                                child: ClipRect(
-                                  child: Column(
-                                    children: [
-                                      const Placeholder(
-                                        fallbackWidth: 20,
-                                        fallbackHeight: 100,
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Text(
-                                        (secondAlbum?.id).toString(),
-                                        style: const TextStyle(fontSize: 24),
-                                      ),
-                                      Text(
-                                        '${secondAlbum?.title}',
-                                        style: const TextStyle(fontSize: 18),
-                                        softWrap: true,
-                                        overflow:
-                                            TextOverflow
-                                                .ellipsis, // Clipped with ellipsis
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      else
-                        Expanded(child: Container()), // Empty for odd count
                     ],
                   ),
                 );
               },
             );
-            // ...existing code...
           }
           return const SizedBox();
         },

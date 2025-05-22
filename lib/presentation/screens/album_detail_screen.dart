@@ -10,7 +10,7 @@ class AlbumDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Album $albumId')),
+      appBar: AppBar(title: Text('Album #$albumId')),
       body: BlocBuilder<AlbumBloc, AlbumState>(
         builder: (context, state) {
           if (state is AlbumLoaded) {
@@ -18,7 +18,6 @@ class AlbumDetailScreen extends StatelessWidget {
             final photos =
                 state.photos.where((p) => p.albumId == albumId).toList();
 
-            // ...existing code...
             return ListView(
               padding: const EdgeInsets.all(16),
               children: [

@@ -1,4 +1,3 @@
-// lib/data/models/album_model.dart
 class Album {
   final int id;
   final String title;
